@@ -79,7 +79,11 @@ analytics:
 author:
   name             : "Alan Velasco"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Estudiante de Ingeniería en Tecnologías Computacionales. Pythonista por vocación. Aficionado al Origami. Amante del pay."
+  bio              : |
+    Estudiante de Ingeniería en Tecnologías Computacionales.
+    Pythonista profesional por vocación.
+    Aficionado al Origami.
+    Amo de pay.
   location         : "Monterrey, Nuevo León"
   email            : "AlanVelasco.A@gmail.com"
   uri              :
