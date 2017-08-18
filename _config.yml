@@ -91,7 +91,7 @@ analytics:
 # Site Author
 author:
   name             : "Alan Velasco"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "https://pbs.twimg.com/profile_images/843702659706175493/6iAiN0wi_400x400.jpg"
   bio              : |
     Estudiante de Ingeniería en Tecnologías Computacionales.
     Pythonista profesional por vocación.
