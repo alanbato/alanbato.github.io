@@ -1,6 +1,6 @@
 ---
-layout: post
 title:  "Primer Entrada"
+excerpt: "Esta primer entrada es de prueba, favor de no leer"
 ---
 1 2 3. Probando. Probando. 1 2 3.
 
