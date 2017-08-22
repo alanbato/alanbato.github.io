@@ -3,7 +3,7 @@ title:  "Introducción a los Google OR-Tools con Python"
 excerpt: "Breve introducción a la suite de herramientas de optimización de Google OR-Tools."
 ---
 ## Google OR-Tools
-Las Herramientas de [Optimización de Google (OR-Tools)]((https://developers.google.com/optimization/)) es una suite de software [Open Source](https://github.com/google/or-tools) enfocada en resolver
+Las Herramientas de [Optimización de Google (OR-Tools)](https://developers.google.com/optimization/) es una suite de software [Open Source](https://github.com/google/or-tools) enfocada en resolver
 problemas de optimización combinatorios. Algunos ejemplos de este tipo de problemas son el problema del viajero
 y el problema de la mochila, y ambos problemas pueden ser resueltos utilizando la suite de OR-Tools.
 Aunque OR-Tools fue escrito en C++ por ingenieros de Google, este también puede ser usado con Java, C# y Python.
