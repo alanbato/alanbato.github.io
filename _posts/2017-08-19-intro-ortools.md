@@ -25,7 +25,7 @@ soluciones que cumplan con todas las restricciones.
 ### El Corral
 Para poner un ejemplo de cómo utilizar esta librería, se propone el siguiente problema:
 
-Supongamos que estamos en un rancho y en un corral vemos 56 patas y 20 cabezas.
+Supongamos que estamos en un rancho y en un corral vemos 56 patas y 20 cabezas de ganado.
 Entonces, ¿A cuántas vacas y a cuantas gallinas estamos viendo?
 
 Con OR-Tools, lo podríamos resolver de la siguiente manera:
