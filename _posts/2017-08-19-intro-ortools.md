@@ -1,9 +1,9 @@
 ---
 title:  "Introducción a los Google OR-Tools con Python"
-excerpt: "Breve introducción a la suite de herramientas de optimización de Google."
+excerpt: "Breve introducción a la suite de herramientas de optimización de Google OR-Tools."
 ---
 ## Google OR-Tools
-Las Herramientas de Optimización de Google (OR-Tools) es una suite de software Open Source enfocada en resolver
+Las Herramientas de Optimización de Google (OR-Tools)[^1] es una suite de software Open Source[^2] enfocada en resolver
 problemas de optimización combinatorios. Algunos ejemplos de este tipo de problemas son el problema del viajero
 y el problema de la mochila, y ambos problemas pueden ser resueltos utilizando la suite de OR-Tools.
 Aunque OR-Tools fue escrito en C++ por ingenieros de Google, este también puede ser usado con Java, C# y Python.
@@ -30,28 +30,44 @@ Entonces, ¿A cuántas vacas y a cuantas gallinas estamos viendo?
 
 Con OR-Tools, lo podríamos resolver de la siguiente manera:
 
-{% highlight python linenos %}
+Primero, creamos un solucionador de optimización restrictiva default y le ponemos de nombre `Corral`
+{% highlight python %}
 from ortools.constraint_solver import pywrapcp
 
-# Creamos un solucionador de optimización restrictiva y le ponemos Corral
 solver = pywrapcp.Solver('Corral')
+{% endhighlight %}
 
-# Tenemos como mínimo 0 vacas y como máximo tenemos 20
+Luego, definimos nuestras restricciones:
+- Tenemos como mínimo 0 vacas y como máximo tenemos 20.
+- De la misma manera, hay como mínimo 0 gallinas y como máximo 20.
+Para esto, las definimos como enteros de magnitud variable.
+{% highlight python %}
 vacas = solver.IntVar(0, 20, 'Vacas')
-# Tenemos como mínimo 0 gallinas y como máximo tenemos 20
 gallinas = solver.IntVar(0, 20, 'Gallinas')
+{% endhighlight %}
 
-# Agregamos la restricción: Entre las vacas y gallinas deben ser 56 patas
+Ahora, agregamos las siguientes restricciones y relaciones:
+- Entre las vacas y gallinas deben de ser 56 patas en total.
+- Además, entre ambos animales deben de sumar 20 cabezas.
+{% highlight python %}
+# 4 patas por cada vaca, y 2 patas por cada gallina
 solver.Add((vacas * 4) + (gallinas * 2) == 56)
-# Agregamos la restricción: Entre las vacas y gallinas deben ser 20 cabezas
+# Una cabeza por cada una
 solver.Add(vacas + gallinas == 20)
+{% endhighlight %}
 
-# Creamos un constructor de decisiones que dicta como se asignan los diferentes
-# valores a las variables
-constructor_decisiones = solver.Phase([vacas, gallinas],
-                                      solver.CHOOSE_FIRST_UNBOUND,
-                                      solver.ASSIGN_MIN_VALUE)
-# Solucionamos el problema con nuestro constructor e imprimimos las soluciones
+Lo siguiente es crear un constructor de decisiones que es el que dicta cómo se asignan los diferentes valores a las variables durante la ejecución del solucionador. Para esto creamos un constructor de decisiones de tipo `Phase` con los siguientes parámetros:
+- Una lista con las variables de las cuales queremos encontrar su valor
+- La forma en la que el solucionador tomará la siguiente variable a la cual asignarle un valor, en este caso elegirá la primera que no tenga valor en el orden en el cual aparecen en la lista previa.
+- La manera en la que se eligirá el siguiente valor a asignar a cierta variable, en este caso, será el mínimo valor posible que no se ha intentado aún.
+{% highlight python %}
+constructor = solver.Phase([vacas, gallinas],
+                           solver.CHOOSE_FIRST_UNBOUND,
+                           solver.ASSIGN_MIN_VALUE)
+{% endhighlight %}
+
+Ahora sólo nos queda solucionar el problema con nuestro constructor e imprimir las soluciones que encuentre.
+{% highlight python %}
 solver.Solve(constructor_decisiones)
 num_solucion = 0
 while solver.NextSolution():
@@ -59,11 +75,10 @@ while solver.NextSolution():
     print(f'Solución {num_solucion}')
     print(f'Veo {vacas.Value()} vacas')
     print(f'Veo {gallinas.Value()} gallinas')
-
 {% endhighlight %}
 
 La solución encontrada por el solucionador es la siguiente:
-> Solución 1
+  Solución 1
   Veo 8 vacas
   Veo 12 gallinas
 
@@ -72,4 +87,7 @@ pensando en variables y restricciones.
 En futuras ocasiones subiremos un poco el nivel de complejidad de los problemas para demostrar
 a tope las capacidades de los OR-Tools de Google.
 
-¡Felices Fiestas! 
+¡Felices Fiestas!
+
+[^1] [Google OR-Tools, documentación oficial](https://developers.google.com/optimization/) (en inglés)
+[^2] [Google OR-Tools, repositorio en Github](https://github.com/google/or-tools)
