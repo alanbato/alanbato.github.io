@@ -79,7 +79,9 @@ while solver.NextSolution():
 
 La solución encontrada por el solucionador es la siguiente:
 > Solución 1
+>
 > Veo 8 vacas
+>
 > Veo 12 gallinas
 
 Aunque este fue un problema algo simple, sirve como ejemplo básico de cómo modelar un problema
