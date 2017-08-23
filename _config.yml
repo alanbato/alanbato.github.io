@@ -11,9 +11,9 @@ title                    : "Serpientes y Escaleras"
 title_separator          : "-"
 name                     : "Alan Velasco"
 description              : "El blog personal de Alan Velasco. WIP."
-url                      : "https://alanbato.github.io"
+url                      : "https://alanbato.com"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+repository               : alanbato/alanbato.github.io
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
