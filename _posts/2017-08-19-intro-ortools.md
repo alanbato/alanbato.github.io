@@ -85,6 +85,33 @@ La solución encontrada por el solucionador es la siguiente:
 >
 > Veo 12 gallinas
 
+Aquí está el programa completo:
+{% highlight python %}
+from ortools.constraint_solver import pywrapcp
+
+solver = pywrapcp.Solver('Corral')
+
+# Tenemos como mínimo 0 y como máximo 20 de cada animal
+vacas = solver.IntVar(0, 20, 'Vacas')
+gallinas = solver.IntVar(0, 20, 'Gallinas')
+# 4 patas por cada vaca, y 2 patas por cada gallina
+solver.Add((vacas * 4) + (gallinas * 2) == 56)
+# Una cabeza por cada una
+solver.Add(vacas + gallinas == 20)
+# Creamos el constructor de decisiones
+constructor = solver.Phase([vacas, gallinas],
+                           solver.CHOOSE_FIRST_UNBOUND,
+                           solver.ASSIGN_MIN_VALUE)
+# Imprimimos todas las soluciones encontradas
+solver.Solve(constructor_decisiones)
+num_solucion = 0
+while solver.NextSolution():
+    num_solucion += 1
+    print(f'Solución {num_solucion}')
+    print(f'Veo {vacas.Value()} vacas')
+    print(f'Veo {gallinas.Value()} gallinas')
+{% endhighlight %}
+
 Aunque este fue un problema algo simple, sirve como ejemplo básico de cómo modelar un problema
 pensando en variables y restricciones.
 En futuras ocasiones subiremos un poco el nivel de complejidad de los problemas para demostrar
