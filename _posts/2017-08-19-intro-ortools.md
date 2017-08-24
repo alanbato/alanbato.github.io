@@ -2,7 +2,7 @@
 title:  "Introducción a los Google OR-Tools con Python"
 excerpt: "Breve introducción a la suite de herramientas de optimización de Google OR-Tools."
 ---
-(/assets/img/chickens.jpg)
+![A group of chickens in a farm.](/assets/img/chickens.jpg)
 ## Google OR-Tools
 Las Herramientas de [Optimización de Google (OR-Tools)](https://developers.google.com/optimization/) es una suite de software [Open Source](https://github.com/google/or-tools) enfocada en resolver
 problemas de optimización combinatorios. Algunos ejemplos de este tipo de problemas son el problema del viajero
