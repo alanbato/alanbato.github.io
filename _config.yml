@@ -267,6 +267,6 @@ defaults:
       share: true
       related: true
   - scope:
-      path: "assets/img"
+      path: "assets/images"
     values:
       image: true
