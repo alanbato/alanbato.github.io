@@ -81,8 +81,11 @@ author:
   avatar           : "https://pbs.twimg.com/profile_images/843702659706175493/6iAiN0wi_400x400.jpg"
   bio              : |
     Estudiante de Ingeniería en Tecnologías Computacionales.
+
     Pythonista por elección.
+
     Aficionado al Origami.
+
     Amo el pay.
   location         : "Monterrey, Nuevo León"
   email            : "AlanVelasco.A@gmail.com"
@@ -103,7 +106,7 @@ author:
   pinterest        :
   soundcloud       :
   stackoverflow    : # "123456/username" (the last part of your profile url, e.g. http://stackoverflow.com/users/123456/username)
-  steam            :
+  steam            : "alanbato"
   tumblr           :
   twitter          : "alanbato"
   vine             :
