@@ -18,7 +18,7 @@ baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : alanbato/alanbato.github.io
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
-words_per_minute         : 200
+words_per_minute         : 150
 comments:
   provider               : # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "staticman_v2" "custom"
   disqus:
@@ -94,11 +94,8 @@ author:
   avatar           : "https://pbs.twimg.com/profile_images/843702659706175493/6iAiN0wi_400x400.jpg"
   bio              : |
     Estudiante de Ingeniería en Tecnologías Computacionales.
-
     Pythonista por elección.
-
-    Aficionado al Origami.
-
+    Gran aficionado del Origami.
     Amo el pay.
   location         : "Monterrey, Nuevo León"
   email            : "AlanVelasco.A@gmail.com"
