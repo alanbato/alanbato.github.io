@@ -1,6 +1,6 @@
 ---
 title:  "Comprendiendo la Comprensión de Listas en Python"
-excerpt: "."
+excerpt: "Una exploración de las utilidades de la comprensión de listas."
 ---
 ## Comprensión de Listas en Python
 Python es reconocido por su alta versatilidad y su facilidad para manejar datos
