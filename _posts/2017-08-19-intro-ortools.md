@@ -1,9 +1,8 @@
 ---
 title:  "Introducción a los Google OR-Tools con Python"
 excerpt: "Breve introducción a la suite de herramientas de optimización de Google OR-Tools."
-image:
-    feature: assets/images/chickens.jpg
-    thumb: assets7images/chickens-thumb.jpg
+header:
+    image: assets/images/chickens.jpg
 ---
 ## Google OR-Tools
 Las Herramientas de [Optimización de Google (OR-Tools)](https://developers.google.com/optimization/) es una suite de software [Open Source](https://github.com/google/or-tools) enfocada en resolver
