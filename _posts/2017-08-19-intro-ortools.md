@@ -1,6 +1,6 @@
 ---
 title:  "Introducción a los Google OR-Tools con Python"
-excerpt: "Breve introducción a la suite de herramientas de optimización de Google OR-Tools."
+excerpt: "Introducción a la suite de herramientas de optimización de Google OR-Tools."
 header:
     image: assets/images/chickens.jpg
 ---
