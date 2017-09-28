@@ -263,7 +263,3 @@ defaults:
       comments: true
       share: true
       related: true
-  - scope:
-      path: "assets/images"
-    values:
-      image: true
