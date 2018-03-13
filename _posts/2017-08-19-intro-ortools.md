@@ -1,8 +1,6 @@
 ---
 title:  "Introduction to the Google OR-Tools in Python"
-excerpt: ""A short introduction to the OR-Tools optimization suite""
-header:
-    image: assets/images/chickens.jpg
+excerpt: "A short introduction to the OR-Tools optimization suite"
 ---
 ## Google OR-Tools
 The [Google Optimization Tools (OR-Tools)](https://developers.google.com/optimization/) is an [Open Source](https://github.com/google/or-tools) software suite focused on solving combinatorial optimization problems. Some examples of this type of problem are the traveling salesman problem and the knapsack problem, and both problems can be solved using the OR-Tools suite.
