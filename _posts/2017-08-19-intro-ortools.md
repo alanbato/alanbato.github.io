@@ -1,121 +1,117 @@
 ---
-title:  "Introducción a los Google OR-Tools con Python"
-excerpt: "Introducción a la suite de herramientas de optimización de Google OR-Tools."
+title:  "Introduction to the Google OR-Tools in Python"
+excerpt: ""A short introduction to the OR-Tools optimization suite""
 header:
     image: assets/images/chickens.jpg
 ---
 ## Google OR-Tools
-Las Herramientas de [Optimización de Google (OR-Tools)](https://developers.google.com/optimization/) es una suite de software [Open Source](https://github.com/google/or-tools) enfocada en resolver
-problemas de optimización combinatorios. Algunos ejemplos de este tipo de problemas son el problema del viajero
-y el problema de la mochila, y ambos problemas pueden ser resueltos utilizando la suite de OR-Tools.
-Aunque OR-Tools fue escrito en C++ por ingenieros de Google, este también puede ser usado con Java, C# y Python.
+The [Google Optimization Tools (OR-Tools)](https://developers.google.com/optimization/) is an [Open Source](https://github.com/google/or-tools) software suite focused on solving combinatorial optimization problems. Some examples of this type of problem are the traveling salesman problem and the knapsack problem, and both problems can be solved using the OR-Tools suite.
+Although OR-Tools was written in C++ by Google engineers, it can also be used with wrappers for Java, C# and Python.
 
-La librería incluye diversos tipos de algoritmos solucionadores, pero en esta ocasión nos enfocaremos en el
-solucionador de optimización restrictiva.
+The library includes several types of solving algorithms, but this time we will focus on the
+constraint optimization solver.
 
-## Optimización Restrictiva
-La optimización restrictiva, o programación restrictiva, es una técnica que se utiliza para encontrar soluciones
-factibles dentro de un conjunto muy grande de soluciones posibles. Se caracteriza por el planteamiento de relaciones
-y restricciones entre las variables,y estas deben ser respetadas por la solución para que ésta pueda ser considerada
-como factible.
+## Constraint Optimization
+Constraint optimization, or constraint programming (CP), is a technique used to find feasible solutions within a very large set of possible solutions. It is characterized by the establishment of relationships
+and constraints between the variables. These constraints must be respected by the solution so that it can be considered feasible.
 
-La optimización restrictiva trata de encontrar soluciones factibles más que soluciones óptimas, ya que se enfoca
-en las restricciones entre variables en vez de una función objetivo. Incluso, puede que un problema de programación
-restrictiva ni siquiera tenga una función objetivo que optimizar, por lo que sólo se busca encontrar un conjunto de
-soluciones que cumplan con todas las restricciones.
+Constraint optimization tries to find feasible solutions rather than optimal solutions, since it focuses
+in the constraints between variables instead of an objective function. Moreover, a constraint programming problem does not even need an objective function to optimize, in which case we only look for the set of solutions that meet all constraints.
 
-### El Corral
-Para poner un ejemplo de cómo utilizar esta librería, se propone el siguiente problema:
+### The Farm
+To illustrate the usage of the Python module, the following problem is proposed:
 
-> Supongamos que estamos en un rancho y en un corral vemos 56 patas y 20 cabezas de ganado.
-> Entonces, ¿A cuántas vacas y a cuantas gallinas estamos viendo?
+> Suppose we are in a farm and in a pen we see 56 legs and 20 heads of cows and chickens.
+> Then, how many cows and how many chickens are we seeing?
 
-Con OR-Tools, lo podríamos resolver de la siguiente manera:
+You can install OR-Tools with `pip install ortools` for python2 and `pip install py3-ortools` for the python3 version
 
-Primero, creamos un solucionador de optimización restrictiva default y le ponemos de nombre `Corral`
+Using OR-Tools, we could solve the problem in the following way:
+
+First, we import the module and create a default CP solver named `Farm`.
 {% highlight python %}
 from ortools.constraint_solver import pywrapcp
 
-solver = pywrapcp.Solver('Corral')
+solver = pywrapcp.Solver('Farm')
 {% endhighlight %}
 
-Luego, definimos nuestras restricciones:
-- Tenemos como mínimo 0 vacas y como máximo tenemos 20.
-- De la misma manera, hay como mínimo 0 gallinas y como máximo 20.
-Para esto, las definimos como enteros de magnitud variable.
+Then, we start defining our constraints based on the problem description:
+- Since we see 20 heads, we have at least 0 cows and no more than 20.
+- Likewise, we have at least 0 chickens and no more than 20.
+
+With this information, we can define the number of cows and chickens as Integers which current value we don't know yet, but we can put bounds on the values it can take (also known as domain).
 {% highlight python %}
-vacas = solver.IntVar(0, 20, 'Vacas')
-gallinas = solver.IntVar(0, 20, 'Gallinas')
+cows = solver.IntVar(0, 20, 'Cows')
+chickens = solver.IntVar(0, 20, 'Chickens')
 {% endhighlight %}
 
 Ahora, agregamos las siguientes restricciones y relaciones:
-- Entre las vacas y gallinas deben de ser 56 patas en total.
-- Además, entre ambos animales deben de sumar 20 cabezas.
+Now, we add the following constraints and relationships.
+- The total amount of legs of both cows and chickens must be 56.
+- The total amount of animals must be equal to 20.
 {% highlight python %}
-# 4 patas por cada vaca, y 2 patas por cada gallina
-solver.Add((vacas * 4) + (gallinas * 2) == 56)
-# Una cabeza por cada una
-solver.Add(vacas + gallinas == 20)
+# Each cow has 4 legs, and each chicken has 2 legs
+solver.Add((cows * 4) + (chickens * 2) == 56)
+# Each animal has only one head
+solver.Add(cows + chickens == 20)
 {% endhighlight %}
 
-Lo siguiente es crear un constructor de decisiones que es el que dicta cómo se asignan los diferentes valores a las variables durante la ejecución del solucionador. Para esto creamos un constructor de decisiones de tipo `Phase` con los siguientes parámetros:
-- Una lista con las variables de las cuales queremos encontrar su valor
-- La forma en la que el solucionador tomará la siguiente variable a la cual asignarle un valor, en este caso elegirá la primera que no tenga valor en el orden en el cual aparecen en la lista previa.
-- La manera en la que se eligirá el siguiente valor a asignar a cierta variable, en este caso, será el mínimo valor posible que no se ha intentado aún.
+Next step is creating the decision builder, the part of the solution that specifies how the different values will be assigned to the `IntVars` during the solution search. To do this, we use the `Phase` decision builder with the following parameters:
+- A list with the variables we want a value to be found and recorded.
+- The way we want the solver to choose the next variable to assign. In this case, it will choose the next one with no value assigned following the order in the list of variables.
+- The way in which the next value to assign to a certain variable will be chosen. Here, we'll use the minimum value available that has not been used yet for that variable.
 {% highlight python %}
-constructor = solver.Phase([vacas, gallinas],
-                           solver.CHOOSE_FIRST_UNBOUND,
-                           solver.ASSIGN_MIN_VALUE)
+decision_builder = solver.Phase([cows, chickens],
+                                 solver.CHOOSE_FIRST_UNBOUND,
+                                 solver.ASSIGN_MIN_VALUE)
 {% endhighlight %}
 
-Ahora sólo nos queda solucionar el problema con nuestro constructor e imprimir las soluciones que encuentre.
+Now what's left to do is to actually solve the problem and print out the solutions found.
 {% highlight python %}
-solver.Solve(constructor_decisiones)
-num_solucion = 0
+# Solve the problem!
+solver.Solve(decision_builder)
+# Print the solutions
+num_solutions = 0
 while solver.NextSolution():
-    num_solucion += 1
-    print(f'Solución {num_solucion}')
-    print(f'Veo {vacas.Value()} vacas')
-    print(f'Veo {gallinas.Value()} gallinas')
+    num_solutions += 1
+    print(f'Solution {num_solution}')
+    print(f'I see {cows.Value()} cows and {chickens.Value()} chickens')
 {% endhighlight %}
 
-La solución encontrada por el solucionador es la siguiente:
-> Solución 1
+This is the solution found by the solver:
+> Solution 1
 >
-> Veo 8 vacas
->
-> Veo 12 gallinas
+> I see 8 cows and 12 chickens
 
-Aquí está el programa completo:
+Here is the full program:
 {% highlight python %}
 from ortools.constraint_solver import pywrapcp
 
-solver = pywrapcp.Solver('Corral')
+solver = pywrapcp.Solver('Farm')
 
-# Tenemos como mínimo 0 y como máximo 20 de cada animal
-vacas = solver.IntVar(0, 20, 'Vacas')
-gallinas = solver.IntVar(0, 20, 'Gallinas')
-# 4 patas por cada vaca, y 2 patas por cada gallina
-solver.Add((vacas * 4) + (gallinas * 2) == 56)
-# Una cabeza por cada una
-solver.Add(vacas + gallinas == 20)
-# Creamos el constructor de decisiones
-constructor = solver.Phase([vacas, gallinas],
-                           solver.CHOOSE_FIRST_UNBOUND,
-                           solver.ASSIGN_MIN_VALUE)
-# Imprimimos todas las soluciones encontradas
-solver.Solve(constructor_decisiones)
-num_solucion = 0
+# Since we see 20 heads,
+# we have at least 0 no more than 20 of each animal.
+cows = solver.IntVar(0, 20, 'Cows')
+chickens = solver.IntVar(0, 20, 'Chickens')
+# Each cow has 4 legs, and each chicken has 2 legs
+solver.Add((cows * 4) + (chickens * 2) == 56)
+# Each animal has only one head
+solver.Add(cows + chickens == 20)
+# We create the decision builder
+decision_builder = solver.Phase([cows, chickens],
+                                 solver.CHOOSE_FIRST_UNBOUND,
+                                 solver.ASSIGN_MIN_VALUE)
+# Solve the problem!
+solver.Solve(decision_builder)
+# Print the solutions
+num_solutions = 0
 while solver.NextSolution():
-    num_solucion += 1
-    print(f'Solución {num_solucion}')
-    print(f'Veo {vacas.Value()} vacas')
-    print(f'Veo {gallinas.Value()} gallinas')
+    num_solutions += 1
+    print(f'Solution {num_solution}')
+    print(f'I see {cows.Value()} cows and {chickens.Value()} chickens')
 {% endhighlight %}
 
-Aunque este fue un problema algo simple, sirve como ejemplo básico de cómo modelar un problema
-pensando en variables y restricciones.
-En futuras ocasiones subiremos un poco el nivel de complejidad de los problemas para demostrar
-a tope las capacidades de los OR-Tools de Google.
+Even though this was a simple riddle, it serves as a basic example of how one can model a problem thinking about variables and their constraints.
+In future posts we will gradually level up the complexity to fully show the capacties of the Google OR-Tools.
 
-¡Felices Fiestas!
+Happy Days!
