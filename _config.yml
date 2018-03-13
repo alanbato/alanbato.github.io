@@ -18,7 +18,7 @@ baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : alanbato/alanbato.github.io
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
-words_per_minute         : 150
+words_per_minute         : 100
 comments:
   provider               : "disqus" # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "staticman_v2" "custom"
   disqus:
@@ -94,11 +94,15 @@ author:
   avatar           : "https://pbs.twimg.com/profile_images/843702659706175493/6iAiN0wi_400x400.jpg"
   bio              : |
     Student of Computer Science and Technology at ITESM.
+
     SWE at Disruptive Angels by day.
+
     Open Source enthusiast by night.
+
     Pythonista all year round.
+
     ~ Origami Aficionado ~
-  location         : "Monterrey, Nuevo León, México"
+  location         : "Monterrey, N.L., México"
   email            : "AlanVelasco.A@gmail.com"
   uri              :
   home             : # null (default), "absolute or relative url to link to author home"
