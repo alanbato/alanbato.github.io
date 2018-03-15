@@ -92,16 +92,12 @@ analytics:
 author:
   name             : "Alan Velasco"
   avatar           : "https://pbs.twimg.com/profile_images/843702659706175493/6iAiN0wi_400x400.jpg"
-  bio              : |
+  bio              : >
     Student of Computer Science and Technology at ITESM.
-
     SWE at Disruptive Angels by day.
-
     Open Source enthusiast by night.
-
     Pythonista all year round.
-
-    ~ Origami Aficionado ~
+    Origami Aficionado.
   location         : "Monterrey, N.L., México"
   email            : "AlanVelasco.A@gmail.com"
   uri              :
