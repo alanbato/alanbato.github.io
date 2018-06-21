@@ -36,7 +36,8 @@ from ortools.constraint_solver import pywrapcp
 solver = pywrapcp.Solver('Sudoku')
 # Create the board of 9x9 cells
 sudoku_board = [
-    [solver.IntVar(1, 9, 'Cell') for i in range(9)] for j in range(9)
+    [solver.IntVar(1, 9, 'Cell') for i in range(9)]
+    for j in range(9)
 ]
 
 # Each row must have unique numbers from 1 to 9
@@ -63,7 +64,9 @@ for i in range(0, 9, 3):
 # To build the phase, we need a 1D list of IntVars
 from itertools import chain
 cells = chain.from_iterable(sudoku_board)
-sudoku_phase = solver.Phase(cells, solver.CHOOSE_FIRST_UNBOUND, solver.ASSIGN_RANDOM_VALUE)
+sudoku_phase = solver.Phase(
+    cells, solver.CHOOSE_FIRST_UNBOUND, solver.ASSIGN_RANDOM_VALUE
+)
 # Solve the problem!
 solver.Solve(sudoku_phase)
 # Now we can get all the Sudoku solutions we want...
@@ -72,11 +75,13 @@ for row in sudoku_board:
     for cell in row:
         print(cell.Value(), end=' ')
     print('\n')
-# Subsequent calls to NextSolution() will generate new solutions...ad infinitum!
+# Subsequent calls to NextSolution() will generate new solutions
+# ...ad infinitum!
 # (Not really infinite, just a lot of them)
 {% endhighlight %}
 
 And the solution to the third problem deserves a blog post on its own, so you'll have to wait
-for that one. But with the code presented here and some thinking you can solve it on your own!
+for that one.
+But with the code presented here and some thinking you can solve it on your own!
 
 Happy days!
