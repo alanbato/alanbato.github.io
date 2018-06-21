@@ -2,7 +2,7 @@
 title:  "SF Python OR-Tools Workshop"
 excerpt: "I gave a workshop on OR-Tools and here is all the info"
 ---
-Yesterday (20/Jun/18) I gave a workshop at the SF Python Hack Night at [Holberton School](https://www.holbertonschool.com/) about the [Google OR-Tools](https://developers.google.com/optimization/) library. I'm posting the slides on [SpeakerDeck](https://speakerdeck.com/alanbato/constraint-programming-with-python) and as [Direct download]({{ "/assets/files/ortools_workshop.pdf | absolute_url }}) along with the code solutions here.
+Yesterday (20/Jun/18) I gave a workshop at the SF Python Hack Night at [Holberton School](https://www.holbertonschool.com/) about the [Google OR-Tools](https://developers.google.com/optimization/) library. I'm posting the slides on [SpeakerDeck](https://speakerdeck.com/alanbato/constraint-programming-with-python) and as [Direct download]({{ "/assets/files/ortools_workshop.pdf | relative_url }}) along with the code solutions here.
 
 ## Solution 1.1 The Farm
 {% highlight python %}
