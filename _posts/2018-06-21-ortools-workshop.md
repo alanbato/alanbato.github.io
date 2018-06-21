@@ -5,7 +5,7 @@ excerpt: "I gave a workshop on OR-Tools and here is all the info"
 Yesterday (20/Jun/18) I gave a workshop at the SF Python Hack Night at [Holberton School](https://www.holbertonschool.com/) about the [Google OR-Tools](https://developers.google.com/optimization/) library. I'm posting the slides on [SpeakerDeck](https://speakerdeck.com/alanbato/constraint-programming-with-python) and as [Direct download]({{ "/assets/files/ortools_workshop.pdf | absolute_url }}) along with the code solutions here.
 
 ## Solution 1.1 The Farm
-{{ highlight python }}
+{% highlight python %}
 from ortools.constraint_solver import pywrapcp
 
 solver = pywrapcp.Solver('Farm')
@@ -30,7 +30,7 @@ print(f'I see {cows.Value()} cows and {chickens.Value()} chickens')
 {% endhighlight %}
 
 ## Solution 2 Sudoku
-{{ highlight python }}
+{% highlight python %}
 from ortools.constraint_solver import pywrapcp
 
 solver = pywrapcp.Solver('Sudoku')
@@ -74,7 +74,7 @@ for row in sudoku_board:
     print('\n')
 # Subsequent calls to NextSolution() will generate new solutions...ad infinitum!
 # (Not really infinite, just a lot of them)
-{{ endhighlight }}
+{% endhighlight %}
 
 And the solution to the third problem deserves a blog post on its own, so you'll have to wait
 for that one. But with the code presented here and some thinking you can solve it on your own!
