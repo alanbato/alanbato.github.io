@@ -2,7 +2,7 @@
 title:  "SF Python OR-Tools Workshop"
 excerpt: "I gave a workshop on OR-Tools and here is all the info"
 ---
-Yesterday (20/Jun/18) I gave a workshop at the SF Python Hack Night at [Holberton School](https://www.holbertonschool.com/) about the [Google OR-Tools](https://developers.google.com/optimization/) library. I'm posting the slides on [SpeakerDeck](https://speakerdeck.com/alanbato/constraint-programming-with-python) and as [Direct download]({{ "/assets/files/ortools_workshop.pdf | relative_url }}) along with the code solutions here.
+Yesterday (20/Jun/18) I gave a workshop at the SF Python Hack Night at [Holberton School](https://www.holbertonschool.com/) about the [Google OR-Tools](https://developers.google.com/optimization/) library. I'm posting the slides on [SpeakerDeck](https://speakerdeck.com/alanbato/constraint-programming-with-python) along with the code solutions in this post.
 
 ## Solution 1.1 The Farm
 {% highlight python %}
@@ -79,6 +79,11 @@ for row in sudoku_board:
 # ...ad infinitum!
 # (Not really infinite, just a lot of them)
 {% endhighlight %}
+
+If you want to learn more about the internal solver works to solve this problem, take a look at [this post](http://norvig.com/sudoku.html) from
+Peter Norvig of a pure python implementation of a constraint-based solver of the Sudoku puzzle.
+Much thanks to Darren Nelson for sending me the link after attending the workshop :)
+
 
 And the solution to the third problem deserves a blog post on its own, so you'll have to wait
 for that one.
